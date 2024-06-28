@@ -18,8 +18,8 @@ class TestMainFunction(unittest.TestCase):
     @patch('src.main.check_and_execute_sell_order')
     @patch('src.main.rate_limiter')
     def test_main(self, mock_rate_limiter, mock_sell, mock_buy, mock_last_price, mock_available_products, mock_current_price, mock_sleep):
-        # Mock the available products to control the flow in the main function
-        mock_available_products.return_value = ['BTC-USD']
+        # Mock the available products to control the flow in the main function, remind self to pay attention just cause it runs doesn mean it will be right...
+        mock_available_products.return_value = ['BTC-USD']#so we will use this jsut to test but remeber to maybe add a user input to test also so scraping will work when we add that..
 
         # Mock the last checked price
         mock_last_price.return_value = 45000.0
@@ -41,10 +41,10 @@ class TestMainFunction(unittest.TestCase):
         except TestExitLoopException:
             pass  # Expected exception to exit the loop
 
-        # Assert that fetch_current_price_data was called
+        # Make sure that fetch_current_price_data was called
         mock_current_price.assert_called()
 
-        # Assert that the rate limiter was called
+        # Make sure that the rate limiter was called,, IMPORTANT!!!!!!!!!!!!!! 
         mock_rate_limiter.assert_called()
 
         # Assert that check_and_execute_buy was called
