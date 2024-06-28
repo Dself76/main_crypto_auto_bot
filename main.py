@@ -269,9 +269,9 @@ def check_and_execute_sell_order(product_id, purchase_price, highest_price, prev
                 order_details_df = pd.DataFrame([{
                     'product_id': product_id,
                     'amount_sold': amount_to_sell,
-                    'sell_price': current_price,  # Assuming you want to record the sell price
+                    'sell_price': current_price,  # Assuming you/me whoever(just me since Im alone on this project but hopefully someone will eventually look at it!!) want to record the sell price,which should be but not necessarily needed
                     'time': datetime.now(),
-                    # Include other relevant details from response_data if and when needed
+                    # Include other relevant details from response_data if and when needed...like anything the user wants...can think about this later
                 }])
                 append_to_csv(order_details_df, 'sell_orders.csv')
 
@@ -302,7 +302,7 @@ def main():
                 available_products = get_available_products()
                 for product_id in available_products:
                     rate_limiter()  # Apply rate limiting here
-                    last_checked_price = fetch_last_checked_price(product_id)  # You need to define this
+                    last_checked_price = fetch_last_checked_price(product_id)  # I need to define this and make more efficient..
                     if check_and_execute_buy(product_id, last_checked_price):
                         owned_crypto = True
                         break  # Exit the loop after buying a cryptocurrency
@@ -320,7 +320,8 @@ def main():
                         highest_price = 0  # Reset the highest price
                     previous_price = current_price
 
-            time.sleep(1)  # Sleep to avoid too much CPU usage and hitting rate limits
+            time.sleep(1)  # Sleep to avoid too much CPU usage and hitting rate limits, So to remind myself rate limits are easy to get around, but usage we need to figure if this was ever to get up and running, should be relatively easy to 
+            #to to bring down usuage but dont mess with this until i get the tests done...
 
         except Exception as e:
             logging.error(f"Error in main loop: {e}")
