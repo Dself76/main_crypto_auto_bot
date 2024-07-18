@@ -24,7 +24,7 @@ def exit_loop():
 
 class TestCryptoBot(unittest.TestCase):
 
-    @patch('src.main.requests.get')  # Updated patch path
+    @patch('src.main.requests.get')  # Updated patch path/ should work now, having problem with coinbases api so if this test isnt working double check the sandbox, coinbase is not the easiest to  work with..
     def test_fetch_historical_data_success(self, mock_get):
         # Mock the response from the API call
         mock_response = MagicMock()
@@ -165,7 +165,7 @@ def test_check_and_execute_sell_order(self, mock_fetch_current, mock_post):
         mock_fetch_current.assert_called_with(product_id)
         mock_post.assert_called()
 
-        # Assert based on  function's logic and return value
+        # Assert based on  function's logic and return value/ this should be if true then it will  sell
         self.assertTrue(result)# If the sell was successful, the result should be True
 
 
@@ -180,7 +180,7 @@ class TestMainFunction(unittest.TestCase):
     @patch('src.main.rate_limiter')
     def test_main(self, mock_rate_limiter, mock_sell, mock_buy, mock_last_price, mock_available_products,
                   mock_current_price, mock_sleep):
-        # Mock the available products to control the flow in the main function
+        # Mock the available products to control the flow in the main function/ may have to worry about this later, make sure its not goint to a sink(no output)
         mock_available_products.return_value = ['BTC-USD']
 
         # Mock the last checked price
